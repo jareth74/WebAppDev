@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Ajax</title>
+    <script type="text/javascript">
+       var XMLHttpRequestObject = false;
+       if (window.XMLHttpRequest) {
+           XMLHttpRequestObject = new XMLHttpRequest();
+	} else if (window.ActiveXObject) {
+           XMLHttpRequestObject = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	function getData(datasource, divID) {
+          if (XMLHttpRequestObject) {
+              var obj = document.getElementById(divID);
+ 	      XMLHttpRequestObject.open("GET", datasource, true);
+              XMLHttpRequestObject.onreadystatechange = function () {
+		if (XMLHttpRequestObject.readyState == 4 && XMLHttpRequestObject.status == 200) {
+ 		    obj.innerHTML = XMLHttpRequestObject.responseText;                  
+                   }
+                }
+              XMLHttpRequestObject.send(null);
+         }
+}
+     </script>
+  </head>
+ <body>
+   <h1>Get Data with AJAX</h1>
+   <form>
+   <input type="button" value="Display Message" onclick = "getData('testData.txt', 'targetDiv')">
+   </form>
+   <div id="targetDiv">
+   <p>Here's the data</p>
+   <p>
+    <table>
+	  <tr>
+	    <td><img src=AJAXdam.jpg onmouseover="getData('AJAXdam.txt', 'ajaxDesc')"/></td>
+	  </tr>
+	</table>
+   </p>
+   </div>
+ </body>
+</html>
